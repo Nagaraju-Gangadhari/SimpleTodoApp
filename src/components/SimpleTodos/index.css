@@ -20,3 +20,13 @@
   font-weight: bold;
   align-self: center;
 }
+.input {
+  padding: 10px;
+  border-radius: 10px;
+}
+.button2 {
+  background: #ff8542;
+  color: white;
+  padding: 10px;
+  border: 0px;
+}

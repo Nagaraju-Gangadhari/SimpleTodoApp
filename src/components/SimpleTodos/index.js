@@ -1,5 +1,5 @@
 import {Component} from 'react'
-
+import {v4 as uuidv4} from 'uuid'
 import './index.css'
 
 import TodoItem from '../TodoItem'
@@ -42,22 +42,63 @@ const initialTodosList = [
 // Write your code here
 
 class SimpleTodos extends Component {
-  state = {TodoList: initialTodosList}
+  state = {
+    todoList: initialTodosList,
+    taskInput: '',
+  }
 
   deleteUser = id => {
-    const {TodoList} = this.state
-    const FilterTodoList = TodoList.filter(each => each.id !== id)
-    this.setState({TodoList: FilterTodoList})
+    const {todoList} = this.state
+    const FilterTodoList = todoList.filter(each => each.id !== id)
+    this.setState({todoList: FilterTodoList})
+  }
+
+  onSubmission = event => {
+    event.preventDefault()
+    const {taskInput} = this.state
+    const newTask = {
+      id: uuidv4(),
+      title: taskInput,
+    }
+    this.setState(prevState => ({
+      todoList: [...prevState.todoList, newTask],
+      taskInput: '',
+    }))
+  }
+
+  onChangetoUpdate = event => {
+    this.setState({taskInput: event.target.value})
+  }
+
+  renderAddbutton = () => {
+    const {taskInput} = this.state
+    return (
+      <form onSubmit={this.onSubmission}>
+        <input
+          type="text"
+          className="input"
+          id="input"
+          onChange={this.onChangetoUpdate}
+          value={taskInput}
+        />
+        <label htmlFor="input" className="label">
+          <button className="button2" type="submit">
+            Add
+          </button>
+        </label>
+      </form>
+    )
   }
 
   render() {
-    const {TodoList} = this.state
+    const {todoList} = this.state
     return (
       <div className="bgcontainer">
         <div className="card-container">
           <h1 className="heading">Simple Todos</h1>
+          {this.renderAddbutton()}
           <ul className="list-container">
-            {TodoList.map(eachone => (
+            {todoList.map(eachone => (
               <TodoItem
                 todoItem={eachone}
                 key={eachone.id}
