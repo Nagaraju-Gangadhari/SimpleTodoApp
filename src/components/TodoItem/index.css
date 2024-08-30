@@ -1,0 +1,25 @@
+/* Write your CSS here */
+.card {
+  margin: 10px;
+  list-style-type: none;
+}
+.contain {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+button {
+  color: #ff0b37;
+  background-color: transparent;
+  border: #ff0b37 2px solid;
+  border-radius: 10px;
+  padding: 5px;
+  margin: 20px;
+  font-size: 18px;
+}
+.title {
+  color: black;
+  font-family: Roboto;
+  font-size: 20px;
+}
